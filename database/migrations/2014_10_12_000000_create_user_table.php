@@ -13,7 +13,7 @@ class CreateUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('user', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->bigInteger('id_role_enum')->unsigned();
@@ -25,7 +25,7 @@ class CreateUserTable extends Migration
             $table->softDeletes();
         });
 
-        DB::table('user')->insert([
+        DB::table('users')->insert([
             'name' => 'admin',
             'id_role_enum' => 1,
             'email' => 'admin@admin.cz',

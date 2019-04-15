@@ -2,7 +2,40 @@
 
 namespace App\Http\Controllers;
 
-class DashboardController
-{
+use App\Phase;
+use App\Project;
+use App\User;
+use Illuminate\View\View;
 
+/**
+ * Class DashboardController
+ * @package App\Http\Controllers
+ */
+class DashboardController extends Controller
+{
+    /**
+     * Dashboard index
+     * @return View
+     */
+    public function index(): View
+    {
+        $portfolioManagerUsersCount = User::where('id_role_enum', '=', 2)->count();
+        $projectManagerUsersCount = User::where('id_role_enum', '=', 3)->count();
+        $activeProjectCount = Project::where('status', '=', 'Aktivní')->count();
+        $crisisManagementProjectCount = Project::where('status', '=', 'Krizové řízení')->count();
+        $doneProjectCount = Project::where('status', '=', 'Dokončený')->count();
+        $donePhaseCount = Phase::where('state', '=', 'Dokončený')->count();
+        $inProgressPhaseCount = Phase::where('state', '=', 'V řešení')->count();
+        $notDonePhaseCount = Phase::where('state', '=', 'Nedokončený')->count();
+        return view('dashboard.index', compact(
+            'portfolioManagerUsersCount',
+            'projectManagerUsersCount',
+            'activeProjectCount',
+            'crisisManagementProjectCount',
+            'doneProjectCount',
+            'donePhaseCount',
+            'inProgressPhaseCount',
+            'notDonePhaseCount'
+            ));
+    }
 }

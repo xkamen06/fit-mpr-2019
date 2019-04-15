@@ -18,8 +18,8 @@ class CreateProjectTable extends Migration
             $table->string('name');
             $table->integer('estimated_price');
             $table->integer('estimated_time');
-            $table->dateTime('date_from');
-            $table->dateTime('date_to');
+            $table->date('date_from');
+            $table->date('date_to');
             $table->integer('id_user');
             $table->string('status');
             $table->timestamps();

@@ -18,11 +18,11 @@ class CreatePhaseTable extends Migration
             $table->bigInteger('id_project');
             $table->bigInteger('id_user');
             $table->bigInteger('id_phase_enum');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->integer('price');
             $table->integer('spent_time');
-            $table->dateTime('date_from');
-            $table->dateTime('date_to');
+            $table->date('date_from');
+            $table->date('date_to');
             $table->string('state');
             $table->timestamps();
         });
