@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        @if(\Illuminate\Support\Facades\Auth::user()->role === 'admin')
+                        @if(\Illuminate\Support\Facades\Auth::user()->role->name === 'admin')
                             <a class="btn btn-primary" href="{{ route('user.create') }}">
                                 Přidat
                             </a>

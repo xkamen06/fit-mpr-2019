@@ -36,6 +36,7 @@ class ProjectController extends Controller
                 $projIds[] = $phase->id_project;
             }
             $projects = Project::whereIn('id', $projIds)
+                ->orderBy('id', 'desc')
                 ->orWhere('id_user', '=', Auth::id())
                 ->paginate(15);
         }
