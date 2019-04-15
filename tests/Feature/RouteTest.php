@@ -15,7 +15,7 @@ class RouteTest extends TestCase
         if(\Auth::check())
             $response->assertStatus(200);
         else
-            $response->assertStatus(200);
+            $response->assertStatus(302);
 
         $response = $this->get('/login');
         $response->assertStatus(200);
