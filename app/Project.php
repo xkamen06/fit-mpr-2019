@@ -22,7 +22,7 @@ class Project extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'estimated_price', 'estimated_time', 'date_from', 'date_to', 'id_user', 'status'
+        'id', 'name', 'estimated_price', 'estimated_time', 'date_from', 'date_to', 'id_user', 'status'
     ];
 
     /**

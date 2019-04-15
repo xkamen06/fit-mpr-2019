@@ -15,4 +15,13 @@ class RoleEnum extends Model
      * @var string
      */
     protected $table = 'role_enum';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'id',
+    ];
 }

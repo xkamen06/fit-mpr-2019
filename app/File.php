@@ -22,6 +22,6 @@ class File extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'path', 'id_phase'
+        'id', 'name', 'path', 'id_phase'
     ];
 }

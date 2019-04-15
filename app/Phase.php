@@ -22,7 +22,7 @@ class Phase extends Model
      * @var array
      */
     protected $fillable = [
-        'id_project', 'id_user', 'id_phase_enum', 'description', 'price', 'spent_time', 'date_from', 'date_to', 'state'
+        'id', 'id_project', 'id_user', 'id_phase_enum', 'description', 'price', 'spent_time', 'date_from', 'date_to', 'state'
     ];
 
     /**
