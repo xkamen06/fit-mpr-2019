@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProjectTest extends TestCase
 {
-    public function testCreatePhase()
+    public function testCreateProject()
     {
         $data = [
         	'id' => 99,
@@ -17,8 +17,8 @@ class ProjectTest extends TestCase
             'id_user' => 2,
             'estimated_price' => 50,
             'estimated_time' => 5,
-            'date_from' => '2019-04-16 14:14:17',
-            'date_to' => '2019-04-18 14:14:17',
+            'date_from' => '2019-04-16',
+            'date_to' => '2019-04-18',
             'status' => 'stav',
         ];
 
@@ -35,7 +35,7 @@ class ProjectTest extends TestCase
 
     }
 
-    public function testGetPhase()
+    public function testGetProject()
     {
         $data = [
         	'id' => 99,
@@ -43,8 +43,8 @@ class ProjectTest extends TestCase
             'id_user' => 2,
             'estimated_price' => 50,
             'estimated_time' => 5,
-            'date_from' => '2019-04-16 14:14:17',
-            'date_to' => '2019-04-18 14:14:17',
+            'date_from' => '2019-04-16',
+            'date_to' => '2019-04-18',
             'status' => 'stav',
         ];
 
@@ -60,7 +60,7 @@ class ProjectTest extends TestCase
         $this->assertEquals($data['status'], $found->status);
     }
 
-    public function testUpdatePhase()
+    public function testUpdateProject()
     {
         $data = [
         	'id' => 99,
@@ -68,8 +68,8 @@ class ProjectTest extends TestCase
             'id_user' => 6,
             'estimated_price' => 50,
             'estimated_time' => 5,
-            'date_from' => '2019-04-16 14:14:17',
-            'date_to' => '2019-04-18 14:14:17',
+            'date_from' => '2019-04-16',
+            'date_to' => '2019-04-18',
             'status' => 'stav',
         ];
 
@@ -88,7 +88,7 @@ class ProjectTest extends TestCase
         $this->assertEquals($data['status'], $found->status);
     }
 
-    public function testDeletePhase()
+    public function testDeleteProject()
     {
         Project::destroy(99);
         $found = (new Project)->find(99);

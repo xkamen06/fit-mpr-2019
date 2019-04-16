@@ -19,8 +19,8 @@ class PhaseTest extends TestCase
             'description' => 'popis',
             'price' => 50,
             'spent_time' => 5,
-            'date_from' => '2019-04-16 14:14:17',
-            'date_to' => '2019-04-18 14:14:17',
+            'date_from' => '2019-04-16',
+            'date_to' => '2019-04-18',
             'state' => 'stav',
         ];
 
@@ -49,8 +49,8 @@ class PhaseTest extends TestCase
             'description' => 'popis',
             'price' => 50,
             'spent_time' => 5,
-            'date_from' => '2019-04-16 14:14:17',
-            'date_to' => '2019-04-18 14:14:17',
+            'date_from' => '2019-04-16',
+            'date_to' => '2019-04-18',
             'state' => 'stav',
         ];
 
@@ -78,8 +78,8 @@ class PhaseTest extends TestCase
             'description' => 'popis',
             'price' => 50,
             'spent_time' => 5,
-            'date_from' => '2019-04-16 14:14:17',
-            'date_to' => '2019-04-18 14:14:17',
+            'date_from' => '2019-04-16',
+            'date_to' => '2019-04-18',
             'state' => 'stav',
         ];
 
