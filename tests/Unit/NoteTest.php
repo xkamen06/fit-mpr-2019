@@ -4,6 +4,8 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use App\Note;
+use App\Project;
+use App\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -67,5 +69,37 @@ class NoteTest extends TestCase
         Note::destroy(99);
         $found = (new Note)->find(99);
         $this->assertEquals($found, null);
+    }
+
+    public function testCreatePOSTNote()
+    {
+        $data = [
+            'id' => 98,
+            'name' => 'meno',
+            'id_user' => 2,
+            'estimated_price' => 50,
+            'estimated_time' => 5,
+            'date_from' => '2019-04-16',
+            'date_to' => '2019-04-18',
+            'status' => 'stav',
+        ];
+
+        (new Project)->create($data);
+
+        \Auth::login(User::find(1));
+
+        $response = $this->withHeaders([
+            'X-Header' => 'Value',
+        ])->json('POST', '/projekty/komentar/pridat/98', ['content' => 'tututu']);
+
+        $response->assertStatus(302);
+
+        \DB::table("note")
+        ->where("id_project", "=", "98")
+        ->orderBy("id", "DESC")
+        ->take(1)
+        ->delete();
+
+        Project::destroy(98);
     }
 }

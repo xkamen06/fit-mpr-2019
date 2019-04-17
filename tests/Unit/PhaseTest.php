@@ -4,6 +4,8 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use App\Phase;
+use App\User;
+use App\Project;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -105,5 +107,69 @@ class PhaseTest extends TestCase
         Phase::destroy(99);
         $found = (new Phase)->find(99);
         $this->assertEquals($found, null);
+    }
+
+    public function testUpdatePOSTPhase()
+    {
+        $data2 = [
+            'id' => 999,
+            'id_project' => 1,
+            'id_user' => 2,
+            'id_phase_enum' => 3,
+            'description' => 'popis',
+            'price' => 50,
+            'spent_time' => 5,
+            'date_from' => '2019-04-16',
+            'date_to' => '2019-04-18',
+            'state' => 'stav',
+        ];
+
+        $phase = (new Phase)->create($data2);
+
+        $data = [
+            'manager' => 8,
+            'description' => 'popis',
+            'price' => 50,
+            'spent_time' => 5,
+            'date_from' => '2019-04-16',
+            'date_to' => '2019-04-18',
+            'state' => 'stav',
+        ];
+
+        \Auth::login(User::find(1));
+
+        $response = $this->withHeaders([
+            'X-Header' => 'Value',
+        ])->json('POST', 'projekty/faze/update/999', $data);
+
+        $response->assertStatus(302);
+
+        Phase::destroy(999);
+    }
+
+    public function testZmenitPOSTPhase()
+    {
+        $data = [
+            'id' => 199,
+            'name' => 'meno',
+            'id_user' => 2,
+            'estimated_price' => 50,
+            'estimated_time' => 5,
+            'date_from' => '2019-04-16',
+            'date_to' => '2019-04-18',
+            'status' => 'stav',
+        ];
+
+        $project = (new Project)->create($data);
+
+        \Auth::login(User::find(1));
+
+        $response = $this->withHeaders([
+            'X-Header' => 'Value',
+        ])->json('POST', 'projekty/faze/zmenit/199', ['phase' => 5]);
+
+        $response->assertStatus(302);
+
+        Project::destroy(199);
     }
 }
