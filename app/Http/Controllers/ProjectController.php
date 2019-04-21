@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Phase;
+use App\PhaseEnum;
 use App\Project;
 use App\User;
 use App\File;
@@ -24,11 +25,10 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         if (Auth::user()->role === 'admin' || Auth::user()->role === 'portfolio') {
-            $projects = Project::orderBy('id', 'desc')
-                ->paginate(15);
+            $projects = Project::orderBy('id', 'desc');
         } else {
             $phases = DB::table('phase')
                 ->where('id_user', '=', Auth::id())
@@ -37,12 +37,50 @@ class ProjectController extends Controller
             foreach ($phases as $phase) {
                 $projIds[] = $phase->id_project;
             }
-            $projects = Project::whereIn('id', $projIds)
-                ->orderBy('id', 'desc')
-                ->orWhere('id_user', '=', Auth::id())
-                ->paginate(15);
+            
+            $userId = Auth::id();
+            $projects = Project::where(function($query) use ($userId, $projIds) {
+                $query->whereIn('id', $projIds)
+                    ->orderBy('id', 'desc')
+                    ->orWhere('id_user', '=', Auth::id());
+            });
         }
-        return view('project.index', compact('projects'));
+
+        $filters = [];
+        if ($request->input('project_name') !== NULL) {
+            $projects->where(function($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->input('project_name') . '%');
+            });
+            $filters['project_name'] = $request->input('project_name');
+        }
+
+        if ($request->input('project_status') !== NULL) {
+            $projects->where(function($query) use ($request) {
+                $query->where('status', 'LIKE', '%' . $request->input('project_status') . '%');
+            });
+            $filters['project_status'] = $request->input('project_status');
+        }
+
+        if ($request->input('project_manager') !== NULL && $request->input('project_manager') != "-1") {
+            $projects->where(function($query) use ($request) {
+                $query->where('id_user', 'LIKE', '%' . $request->input('project_manager') . '%');
+            });
+            $filters['project_manager'] = $request->input('project_manager');
+        }
+
+        if ($request->input('actual_phase') !== NULL && $request->input('actual_phase') != "-1") {
+            $projects->whereHas('actualPhase', function($query) use ($request) {
+                $query->where('id_phase_enum', '=', $request->input('actual_phase'));
+            });
+            $filters['actual_phase'] = $request->input('actual_phase');
+        }
+        
+        $projects = $projects->paginate(15);
+
+        $managers = User::get();
+        $phases = PhaseEnum::get();
+        
+        return view('project.index', compact('projects', 'managers', 'filters', 'phases'));
     }
 
     /**

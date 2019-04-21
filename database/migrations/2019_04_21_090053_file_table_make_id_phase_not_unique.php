@@ -26,7 +26,7 @@ class FileTableMakeIdPhaseNotUnique extends Migration
     public function down()
     {
         Schema::table('file', function (Blueprint $table) {
-            $table->unique('file_id_phase_unique');
+            $table->unique('id_phase');
         });
     }
 }
