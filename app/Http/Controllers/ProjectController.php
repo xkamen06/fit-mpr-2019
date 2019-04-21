@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Phase;
 use App\Project;
 use App\User;
+use App\File;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 /**
@@ -96,6 +98,15 @@ class ProjectController extends Controller
             }
             $phase->save();
         }
+
+        $uploadedFile = $request->file('file_attachment');
+        $fileName = Str::random(40) . "___" . $uploadedFile->getClientOriginalName();
+        $filePath = $uploadedFile->storeAs('phases_attachments', $fileName);
+
+        $phaseFile = new File();
+        $phaseFile->name = $uploadedFile->getClientOriginalName();
+        $phaseFile->path = $filePath;
+
         return redirect()->route('project.detail', ['projectId' => $project->id]);
     }
 
@@ -127,6 +138,17 @@ class ProjectController extends Controller
         $project->date_from = $request->date_from;
         $project->date_to = $request->date_to;
         $project->save();
+        
+        $uploadedFile = $request->file('file_attachment');
+        $fileName = Str::random(40) . "___" . $uploadedFile->getClientOriginalName();
+        $filePath = $uploadedFile->storeAs('phases_attachments', $fileName);
+
+        $phaseFile = new File();
+        $phaseFile->name = $uploadedFile->getClientOriginalName();
+        $phaseFile->path = $filePath;
+
+        $project->actualPhase->files()->saveMany([$phaseFile]);
+        
         return redirect()->route('project.detail', ['projectId' => $project->id]);
     }
 

@@ -11,7 +11,7 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <form class="form-horizontal" action="{{ route('project.update', ['projectId' => $project->id])  }}" method="post">
+                        <form class="form-horizontal" action="{{ route('project.update', ['projectId' => $project->id])  }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="name">Název</label>
@@ -37,6 +37,11 @@
                                 <label class="control-label col-sm-2" for="date_to">Datum ukončení</label>
                                 <div class="col-sm-8">
                                     <input class="form-control" name="date_to" id="date_to" type="date" value="{{ $project->date_to }}" required>
+                                </div>
+                                <br>
+                                <label class="control-label col-sm-2" for="file_attachment">Příloha</label>
+                                <div class="col-sm-8">
+                                    <input name="file_attachment" id="file_attachment" type="file">
                                 </div>
                                 <br>
                                 <label class="control-label col-sm-2" for="manager">Manažer projektu</label>

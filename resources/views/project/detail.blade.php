@@ -74,12 +74,23 @@
                             <b>Do:</b> {{ $project->actualPhase->date_to }}
                             <br>
                             <b>Popis:</b> {{ $project->actualPhase->description }}
+                            <br>
                         @else
                             Projekt je dokončený
                         @endif
                         <br>
                         <hr>
                         <h2>Soubory</h2>
+                        @forelse($project->actualPhase->files as $file)
+                            @if($loop->first) <ul> @endif
+                                <li>
+                                    <a href="{{ route('file.download', ['fileId' => $file->id]) }}">{{$file->name}}</a>
+                                    <a href="{{ route('file.delete', ['fileId' => $file->id]) }}" class="btn btn-sm btn-danger">Smazat</a>
+                                </li>
+                            @if($loop->last) </ul> @endif
+                        @empty
+                        <p class="alert alert-info">Nebyly nalezeny žádné soubory</p>
+                        @endforelse
                         <br>
                         <hr>
                         <h2>Komentáře</h2>

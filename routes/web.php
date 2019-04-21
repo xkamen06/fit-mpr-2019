@@ -62,6 +62,12 @@ Route::middleware(['auth'])->group(function() {
     Route::get('projekty/faze/zmenit/{projectId}', 'PhaseController@changePhase')->name('phase.change');
 
     Route::post('projekty/faze/zmenit/{projectId}', 'PhaseController@changeUpdatePhase')->name('phase.change.update');
+    
+    /**
+     * Routes for file handling
+     */
+    Route::get('soubor/{file}', 'FileController@show')->name('file.download');
+    Route::get('soubor/{file}/smazat', 'FileController@destroy')->name('file.delete');
 });
 
 

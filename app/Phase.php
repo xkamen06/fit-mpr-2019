@@ -42,4 +42,9 @@ class Phase extends Model
     {
         return $this->belongsTo('App\User', 'id_user', 'id');
     }
+
+    public function files($value='')
+    {
+        return $this->hasMany('App\File', 'id_phase', 'id');
+    }
 }
