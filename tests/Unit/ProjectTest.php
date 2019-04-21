@@ -5,6 +5,9 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use App\Project;
 use App\User;
+use App\Phase;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -105,6 +108,7 @@ class ProjectTest extends TestCase
             'estimated_time' => 5,
             'date_from' => '2019-04-16',
             'date_to' => '2019-04-18',
+            'file_attachment' => $file = UploadedFile::fake()->image('avatar.jpg'),
         ];
 
         \Auth::login(User::find(1));
@@ -114,6 +118,10 @@ class ProjectTest extends TestCase
         ])->json('POST', 'projekty/ulozit', $data);
 
         $response->assertStatus(302);
+
+        \DB::table("phase")
+        ->where("id_project", ">", "98")
+        ->delete();
 
         \DB::table("project")
         ->where("id_user", "=", "2")
@@ -138,6 +146,21 @@ class ProjectTest extends TestCase
 
         (new Project)->create($data2);
 
+        $data3 = [
+            'id' => 99,
+            'id_project' => 98,
+            'id_user' => 2,
+            'id_phase_enum' => 3,
+            'description' => 'popis',
+            'price' => 50,
+            'spent_time' => 5,
+            'date_from' => '2019-04-16',
+            'date_to' => '2019-04-18',
+            'state' => 'V řešení',
+        ];
+
+        $phase = (new Phase)->create($data3);
+
         $data = [
             'name' => 'meno',
             'manager' => 8,
@@ -145,6 +168,7 @@ class ProjectTest extends TestCase
             'estimated_time' => 5,
             'date_from' => '2019-04-16',
             'date_to' => '2019-04-18',
+            'file_attachment' => $file = UploadedFile::fake()->image('anything.jpg'),
         ];
 
         \Auth::login(User::find(1));
@@ -155,17 +179,19 @@ class ProjectTest extends TestCase
 
         $response->assertStatus(302);
 
-        \DB::table("phase")
-        ->where("id_project", ">", "98")
-        ->delete();
+        Phase::destroy(99);
         Project::destroy(98);
+
+        \DB::table("file")
+        ->where("id_phase", "=", "99")
+        ->delete();
 
     }
 
     public function testUpdateStatusPOSTProject()
     {
         $data2 = [
-            'id' => 98,
+            'id' => 97,
             'name' => 'meno',
             'id_user' => 2,
             'estimated_price' => 50,
@@ -181,10 +207,10 @@ class ProjectTest extends TestCase
 
         $response = $this->withHeaders([
             'X-Header' => 'Value',
-        ])->json('POST', 'projekty/status/update/98', ['status' => 'Dokončený']);
+        ])->json('POST', 'projekty/status/update/97', ['status' => 'Dokončený']);
 
         $response->assertStatus(302);
 
-        Project::destroy(98);
+        Project::destroy(97);
     }
 }
