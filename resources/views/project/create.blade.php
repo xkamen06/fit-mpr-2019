@@ -11,7 +11,7 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <form class="form-horizontal" action="{{ route('project.save')  }}" method="post">
+                        <form class="form-horizontal" action="{{ route('project.save')  }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="name">Název</label>
@@ -48,6 +48,10 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <label class="control-label col-sm-2" for="file_attachment">Příloha</label>
+                                <div class="col-sm-8">
+                                    <input name="file_attachment" id="file_attachment" type="file">
                                 </div>
                                 <br>
                                 <div class="col-sm-offset-2 col-sm-10">

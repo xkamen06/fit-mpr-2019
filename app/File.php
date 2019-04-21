@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class File
@@ -24,4 +25,18 @@ class File extends Model
     protected $fillable = [
         'id', 'name', 'path', 'id_phase'
     ];
+
+    /**
+     * Get phase
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function phase()
+    {
+        return $this->belongsTo('App\Phase', 'id_phase', 'id');
+    }
+
+    public function download()
+    {
+        return Storage::download($this->path);
+    }
 }
