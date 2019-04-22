@@ -6,9 +6,9 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <div class="text-center">
+                        <h2 class="text-center mb-4">
                             Upravit uživatele
-                        </div>
+                        </h2>
                     </div>
                     <div class="panel-body">
                         <form class="form-horizontal" action="{{ route('user.update', ['userId' => $user->id])  }}" method="post">

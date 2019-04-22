@@ -6,16 +6,20 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        @if(\Illuminate\Support\Facades\Auth::user()->role->name === 'admin')
-                            <a class="btn btn-primary" href="{{ route('user.create') }}">
-                                Přidat
-                            </a>
-                        @endif
-                        <div class="text-center">
+                        <h2 class="text-center mb-4">
                             Uživatelé
-                        </div>
+                        </h2>
                     </div>
                     <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12 text-right mb-2">
+                                @if(\Illuminate\Support\Facades\Auth::user()->role->name === 'admin')
+                                    <a class="btn btn-primary" href="{{ route('user.create') }}">
+                                        Přidat uživatele
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
                         <table class="table table-striped">
                             <thead>
                             <tr>

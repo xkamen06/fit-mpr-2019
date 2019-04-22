@@ -4,76 +4,94 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form {{-- class="form-inline" --}}>
-                    
-                    <div class="form-row">
-                        <div class="col">
-                            <label class="" for="project-manager">Projektový manažer</label>
-                            <select class="custom-select" name="project_manager" id="project-manager">
-                                <option value="-1">Nezvoleno</option>
-                                @foreach($managers as $manager)
-                                <option value="{{$manager->id}}" @if(array_key_exists('project_manager', $filters) && $filters['project_manager'] == $manager->id) selected="selected=" @endif >{{$manager->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col">
-                            <label class="" for="actual-phase">Aktuální fáze</label>
-                            <select class="custom-select" name="actual_phase" id="actual-phase">
-                                <option value="-1">Nezvoleno</option>
-                                @foreach($phases as $phase)
-                                <option value="{{$phase->id}}" @if(array_key_exists('actual_phase', $filters) && $filters['actual_phase'] == $phase->id) selected="selected=" @endif >{{$phase->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col">
-                            <label class="" for="project-name">Název projektu</label>
-                            <div class="input-group mb-2 mr-sm-2">
-                                <input type="text" class="form-control" id="project-name" name="project_name" placeholder="Název" @if(array_key_exists('project_name', $filters)) value="{{$filters['project_name']}}" @endif>
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <label class="" for="project-status">Status projektu</label>
-                            <div class="input-group mb-2 mr-sm-2">
-                                <input type="text" class="form-control" id="project-status" name="project_status" placeholder="Status" @if(array_key_exists('project_status', $filters)) value="{{$filters['project_status']}}" @endif>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary mb-2 float-right">Submit</button>
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a class="btn btn-primary" href="{{ route('project.create') }}">
-                            Přidat
-                        </a>
-                        <div class="text-center">
-                            Projekty
-                        </div>
+                        <h2 class="text-center mb-4">Projekty</h2>
                     </div>
                     <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12 text-right mb-2">
+                                <a class="btn btn-primary" href="{{ route('project.create') }}">
+                                    Přidat projekt
+                                </a>
+                                <a class="btn btn-secondary" data-toggle="collapse" href="#filters"
+                                   role="button" aria-expanded="false" aria-controls="filters">
+                                    Zobrazit filtry
+                                </a>
+                            </div>
+                        </div>
+                        <div id="filters" class="collapse{{ $filters != null ? ' show' : '' }}">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card mb-2 mt-2">
+                                        <div class="card-body">
+                                            <form {{-- class="form-inline" --}}>
+
+                                                <div class="form-row">
+                                                    <div class="col-2">
+                                                        <label class="" for="project-manager">Projektový manažer</label>
+                                                        <select class="custom-select" name="project_manager"
+                                                                id="project-manager">
+                                                            <option value="-1">Nezvoleno</option>
+                                                            @foreach($managers as $manager)
+                                                                <option value="{{$manager->id}}"
+                                                                        @if(array_key_exists('project_manager', $filters) && $filters['project_manager'] == $manager->id) selected="selected=" @endif >{{$manager->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-3">
+                                                        <label class="" for="actual-phase">Aktuální fáze</label>
+                                                        <select class="custom-select" name="actual_phase"
+                                                                id="actual-phase">
+                                                            <option value="-1">Nezvoleno</option>
+                                                            @foreach($phases as $phase)
+                                                                <option value="{{$phase->id}}"
+                                                                        @if(array_key_exists('actual_phase', $filters) && $filters['actual_phase'] == $phase->id) selected="selected=" @endif >{{$phase->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-3">
+                                                        <label class="" for="project-name">Název projektu</label>
+                                                        <div class="input-group mb-2 mr-sm-2">
+                                                            <input type="text" class="form-control" id="project-name"
+                                                                   name="project_name" placeholder="Název"
+                                                                   @if(array_key_exists('project_name', $filters)) value="{{$filters['project_name']}}" @endif>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-2">
+                                                        <label class="" for="project-status">Status projektu</label>
+                                                        <div class="input-group mb-2 mr-sm-2">
+                                                            <input type="text" class="form-control" id="project-status"
+                                                                   name="project_status" placeholder="Status"
+                                                                   @if(array_key_exists('project_status', $filters)) value="{{$filters['project_status']}}" @endif>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-2">
+                                                        <label class="invisible">Akce</label>
+                                                        <div class="input-group mb-2 mr-sm-2">
+                                                            <button type="submit" class="btn btn-primary form-control">
+                                                                Vyfiltrovat
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th> Název </th>
-                                <th> Projektový manažer</th>
-                                <th> Nápad </th>
-                                <th>Vytvořena Logická rámcová matice</th>
-                                <th>Projekt byl schválen</th>
-                                <th>Finanční prostředky a zdroje jsou uvolněny</th>
-                                <th>Plánování</th>
-                                <th>Návrh řešení</th>
-                                <th>Řešení</th>
-                                <th>Nasazení do provozu</th>
-                                <th>Převzetí zákazníkem</th>
-                                <th>Projekt je ukončen</th>
-                                <th> Status </th>
+                                <th>Název</th>
+                                <th>Projektový manažer</th>
+                                <th style="width: 70%;">Fáze projektu</th>
+                                <th>Status</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -84,21 +102,23 @@
                                             {{ $project->name }}
                                         </a>
                                     </td>
-                                    <td> <a href="{{ route('user.detail', ['userId' => $project->author->id]) }}">
+                                    <td><a href="{{ route('user.detail', ['userId' => $project->author->id]) }}">
                                             {{ $project->author->name }}
                                         </a>
                                     </td>
-                                    @foreach($project->phases as $phase)
                                     <td>
-                                        @if($phase->state === 'V řešení')
-                                            V řešení
-                                        @elseif($phase->state === 'Dokončený')
-                                            Ano
-                                        @else
-                                            Ne
-                                        @endif
+                                        <div class="progress">
+                                            @foreach($project->phases as $phase)
+                                                <div class="progress-bar border-right {{ $phase->state === 'V řešení' ? 'bg-primary' : ($phase->state === 'Nedokončený' ? 'bg-dark' : 'bg-success') }}"
+                                                     style="width: 10%"
+                                                     data-toggle="tooltip"
+                                                     data-placement="bottom"
+                                                     title="{{ $phase->phaseEnum->name }} - {{ $phase->state }}">
+                                                    {{ $phase->phaseEnum->getShortName($phase->phaseEnum->id) }}
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </td>
-                                    @endforeach
                                     <td>{{ $project->status }}</td>
                                 </tr>
                             @endforeach
@@ -110,4 +130,9 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 @endsection

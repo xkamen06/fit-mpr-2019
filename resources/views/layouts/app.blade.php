@@ -15,6 +15,7 @@
     <title>MPR</title>
 
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -29,7 +30,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Přehled
+                    MPR project
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -39,8 +40,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @if(\Illuminate\Support\Facades\Auth::user())
-                            <a class="nav-link" href="{{ route('project.index') }}">Projekty</a>
-                            <a class="nav-link" href="{{ route('user.index') }}">Uživatelé</a>
+                            <a class="nav-link{{ (\Request::route()->getName() == 'home') ? ' active' : '' }}" href="{{ route('home') }}">Nástěnka</a>
+                            <a class="nav-link{{ (\Request::route()->getName() == 'project.index') ? ' active' : '' }}"  href="{{ route('project.index') }}">Projekty</a>
+                            <a class="nav-link{{ (\Request::route()->getName() == 'user.index') ? ' active' : '' }}" href="{{ route('user.index') }}">Uživatelé</a>
                         @endif
                     </ul>
 
