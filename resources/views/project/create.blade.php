@@ -2,6 +2,12 @@
 
 @section('content')
     <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('project.index') }}">Projekty</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Přidat projekt</li>
+            </ol>
+        </nav>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">

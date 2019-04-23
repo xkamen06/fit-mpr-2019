@@ -27,7 +27,7 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        if (Auth::user()->role === 'admin' || Auth::user()->role === 'portfolio') {
+        if (Auth::user()->role->name === 'admin' || Auth::user()->role->name === 'portfolio') {
             $projects = Project::orderBy('id', 'desc');
         } else {
             $phases = DB::table('phase')
@@ -198,8 +198,7 @@ class ProjectController extends Controller
     public function editStatus(int $projectId): View
     {
         $project = Project::find($projectId);
-        $status = $project->status;
-        return view('project.status.edit', compact('projectId', 'status'));
+        return view('project.status.edit', compact('project'));
     }
 
     /**

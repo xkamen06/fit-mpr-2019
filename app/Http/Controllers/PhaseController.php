@@ -24,7 +24,8 @@ class PhaseController extends Controller
     {
         $users = User::all();
         $phase = Phase::find($phaseId);
-        return view('phase.edit', compact('phase', 'users'));
+        $project = $phase->project;
+        return view('phase.edit', compact('phase', 'users', 'project'));
     }
 
     /**

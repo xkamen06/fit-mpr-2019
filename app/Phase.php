@@ -43,6 +43,15 @@ class Phase extends Model
         return $this->belongsTo('App\User', 'id_user', 'id');
     }
 
+    /**
+     * Get author
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function project()
+    {
+        return $this->belongsTo('App\Project', 'id_project', 'id');
+    }
+
     public function files($value='')
     {
         return $this->hasMany('App\File', 'id_phase', 'id');

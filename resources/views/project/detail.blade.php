@@ -2,18 +2,24 @@
 
 @section('content')
     <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('project.index') }}">Projekty</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Projekt "{{ $project->name }}"</li>
+            </ol>
+        </nav>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2 class="text-center mb-4">
-                            Projekt <b>{{ $project->name }}"</b>
+                            Projekt <b>"{{ $project->name }}"</b>
                         </h2>
                     </div>
                     <div class="panel-body">
 
-                        @if(\Illuminate\Support\Facades\Auth::user()->role === 'admin' ||
-                            \Illuminate\Support\Facades\Auth::user()->role === 'portfolio' ||
+                        @if(\Illuminate\Support\Facades\Auth::user()->role->name === 'admin' ||
+                            \Illuminate\Support\Facades\Auth::user()->role->name === 'portfolio' ||
                              \Illuminate\Support\Facades\Auth::id() === $project->id_user)
                             <div class="text-right mb-2">
                                 <a class="btn btn-outline-primary"
@@ -40,8 +46,8 @@
                                         <b>Do: </b>{{ $project->date_to }}
                                         <br/>
                                         <b>Status:</b> {{ $project->status }}
-                                        @if(Auth::user()->role === 'admin' ||
-                                            Auth::user()->role === 'portfolio' ||
+                                        @if(Auth::user()->role->name === 'admin' ||
+                                            Auth::user()->role->name === 'portfolio' ||
                                             Auth::id() === $project->id_user)
                                             <a class="btn btn-outline-primary btn-sm"
                                                href="{{ route('project.status.edit', ['projectId' => $project->id]) }}">
@@ -125,8 +131,8 @@
                                                         </div>
 
                                                         <div class="col-md-6 text-right">
-                                                            @if(Auth::user()->role === 'admin' ||
-                                                            Auth::user()->role === 'portfolio' ||
+                                                            @if(Auth::user()->role->name === 'admin' ||
+                                                            Auth::user()->role->name === 'portfolio' ||
                                                             Auth::id() === $project->id_user ||
                                                             Auth::id() === $phase->id_user)
                                                                 <a class="btn btn-outline-primary"
@@ -134,8 +140,8 @@
                                                                     Upravit aktuální fázi
                                                                 </a>
                                                             @endif
-                                                            @if(Auth::user()->role === 'admin' ||
-                                                                Auth::user()->role === 'portfolio' ||
+                                                            @if(Auth::user()->role->name === 'admin' ||
+                                                                Auth::user()->role->name === 'portfolio' ||
                                                                 Auth::id() === $project->id_user)
                                                                 <a class="btn btn-outline-primary"
                                                                    href="{{ route('phase.change', ['projectId' => $project->id]) }}">

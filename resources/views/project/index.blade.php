@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Projekty</li>
+            </ol>
+        </nav>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -92,6 +97,8 @@
                                 <th>Projektový manažer</th>
                                 <th style="width: 70%;">Fáze projektu</th>
                                 <th>Status</th>
+                                <th>Od</th>
+                                <th>Do</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -120,6 +127,8 @@
                                         </div>
                                     </td>
                                     <td>{{ $project->status }}</td>
+                                    <td><small>{{ $project->date_from }}</small></td>
+                                    <td><small>{{ $project->date_to }}</small></td>
                                 </tr>
                             @endforeach
                             </tbody>
