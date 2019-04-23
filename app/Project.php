@@ -40,7 +40,7 @@ class Project extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\Note', 'id_project', 'id')->orderBy('id', 'asc');
+        return $this->hasMany('App\Note', 'id_project', 'id')->orderBy('id', 'desc');
     }
 
     /**

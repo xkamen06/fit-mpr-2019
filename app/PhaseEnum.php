@@ -24,4 +24,22 @@ class PhaseEnum extends Model
     protected $fillable = [
         'id',
     ];
+
+    public static function getShortName($id)
+    {
+        $names = [
+            1 => 'Nápad',
+            2 => 'Matice',
+            3 => 'Schválení',
+            4 => 'Zdroje',
+            5 => 'Plánování',
+            6 => 'Návrh',
+            7 => 'Řešení',
+            8 => 'Nasazení',
+            9 => 'Převzetí',
+            10 => 'Ukončení',
+        ];
+
+        return $names[$id];
+    }
 }
