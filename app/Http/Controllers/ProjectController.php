@@ -75,8 +75,8 @@ class ProjectController extends Controller
             $filters['actual_phase'] = $request->input('actual_phase');
         }
         
-        $projects = $projects->paginate(15);
-
+//        $projects = $projects->paginate(15);
+        $projects = $projects->get();
         $managers = User::get();
         $phases = PhaseEnum::get();
         

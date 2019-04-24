@@ -90,7 +90,51 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-striped">
+                        {{--<table class="table table-striped">--}}
+                        {{--<thead>--}}
+                        {{--<tr>--}}
+                        {{--<th>Název</th>--}}
+                        {{--<th>Projektový manažer</th>--}}
+                        {{--<th style="width: 70%;">Fáze projektu</th>--}}
+                        {{--<th>Status</th>--}}
+                        {{--<th>Od</th>--}}
+                        {{--<th>Do</th>--}}
+                        {{--</tr>--}}
+                        {{--</thead>--}}
+                        {{--<tbody>--}}
+                        {{--@foreach($projects as $i => $project)--}}
+                        {{--<tr>--}}
+                        {{--<td>--}}
+                        {{--<a href="{{ route('project.detail', ['projectId' => $project->id]) }}">--}}
+                        {{--{{ $project->name }}--}}
+                        {{--</a>--}}
+                        {{--</td>--}}
+                        {{--<td><a href="{{ route('user.detail', ['userId' => $project->author->id]) }}">--}}
+                        {{--{{ $project->author->name }}--}}
+                        {{--</a>--}}
+                        {{--</td>--}}
+                        {{--<td>--}}
+                        {{--<div class="progress">--}}
+                        {{--@foreach($project->phases as $phase)--}}
+                        {{--<div class="progress-bar border-right {{ $phase->state === 'V řešení' ? 'bg-primary' : ($phase->state === 'Nedokončený' ? 'bg-dark' : 'bg-success') }}"--}}
+                        {{--style="width: 10%"--}}
+                        {{--data-toggle="tooltip"--}}
+                        {{--data-placement="bottom"--}}
+                        {{--title="{{ $phase->phaseEnum->name }} - {{ $phase->state }}">--}}
+                        {{--{{ $phase->phaseEnum->getShortName($phase->phaseEnum->id) }}--}}
+                        {{--</div>--}}
+                        {{--@endforeach--}}
+                        {{--</div>--}}
+                        {{--</td>--}}
+                        {{--<td>{{ $project->status }}</td>--}}
+                        {{--<td><small>{{ $project->date_from }}</small></td>--}}
+                        {{--<td><small>{{ $project->date_to }}</small></td>--}}
+                        {{--</tr>--}}
+                        {{--@endforeach--}}
+                        {{--</tbody>--}}
+                        {{--</table>--}}
+
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                             <tr>
                                 <th>Název</th>
@@ -127,20 +171,49 @@
                                         </div>
                                     </td>
                                     <td>{{ $project->status }}</td>
-                                    <td><small>{{ $project->date_from }}</small></td>
-                                    <td><small>{{ $project->date_to }}</small></td>
+                                    <td>
+                                        <small>{{ $project->date_from }}</small>
+                                    </td>
+                                    <td>
+                                        <small>{{ $project->date_to }}</small>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                     </div>
-                    {{ $projects->appends($filters)->links() }}
+                    {{--{{ $projects->appends($filters)->links() }}--}}
                 </div>
             </div>
         </div>
     </div>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
+            $('#example').DataTable( {
+                "columnDefs": [
+                    {
+                        "targets": [ 2 ],
+                        "searchable": false,
+                        "orderable": false
+                    }
+                ],
+                "language": {
+                    "aria": {
+                        "sortAscending": ": klikněte k řazení sloupce vzestupně",
+                        "sortDescending": ": klikněte k řazení sloupce sestupně"
+                    },
+                    "emptyTable": "Žádné data k dispozici :(",
+                    "info": "Zobrazuji _START_ až _END_ záznamů z celkového počtu _TOTAL_",
+                    "infoEmpty": "Žádné záznamy k zobrazení",
+                    "infoFiltered": "",
+                    "lengthMenu": "Počet záznamů na stránku:  _MENU_ ",
+                    "search": "Vyhledat:",
+                    "zeroRecords": "Pro hledaný výraz nebyly nalezeny žádné záznamy",
+                },
+            });
+        });
+
+        $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>

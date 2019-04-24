@@ -19,7 +19,7 @@ class ProjectTableSeeder extends Seeder
         $users = DB::table('users')->get();
         $usersCount = count($users);
 
-        for ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             DB::table('project')->insert([
                 'name' => $faker->word,
                 'estimated_price' => rand(10000, 1000000),
