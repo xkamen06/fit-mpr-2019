@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+//class testing Note module for CRUD and POST requests
 class NoteTest extends TestCase
 {
     public function testCreateNote()

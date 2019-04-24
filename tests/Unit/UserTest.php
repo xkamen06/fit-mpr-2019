@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+//class testing User module for POST requests
 class UserTest extends TestCase
 {
     public function testStorePOSTUser()

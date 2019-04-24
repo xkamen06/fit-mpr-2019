@@ -11,6 +11,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+//class testing Project module for CRUD and POST requests
 class ProjectTest extends TestCase
 {
     public function testCreateProject()

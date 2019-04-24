@@ -9,6 +9,7 @@ use App\Project;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+//class testing Phase module for CRUD and POST requests
 class PhaseTest extends TestCase
 {
     public function testCreatePhase()

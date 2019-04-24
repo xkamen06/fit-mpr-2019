@@ -7,6 +7,7 @@ use App\File;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+//class testing File module for CRUD and POST requests
 class FileTest extends TestCase
 {
     public function testCreateFile()

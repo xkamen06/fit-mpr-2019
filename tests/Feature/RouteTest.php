@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Auth;
 
+//class testing GET requests
 class RouteTest extends TestCase
 {
     public function testRoutes()
