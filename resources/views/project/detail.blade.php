@@ -177,14 +177,28 @@
                                                     <br>
                                                     <b>Popis:</b> {{ $phase->description }}
                                                     <hr>
-                                                    <h5>Soubory</h5>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-6">
+                                                            <h5>Soubory</h5>
+                                                        </div>
+                                                        <div class="col-md-6 text-right">
+                                                            @if(Auth::user()->role->name === 'admin' ||
+                                                                Auth::user()->role->name === 'portfolio' ||
+                                                                Auth::id() === $project->id_user)
+                                                                <a class="btn btn-outline-primary"
+                                                                href="{{ route('file.create', ['phase' => $phase->id]) }}">
+                                                                Přidat soubor
+                                                            </a>
+                                                            @endif
+                                                        </div>
+                                                    </div>
                                                     @forelse($phase->files as $file)
                                                         @if($loop->first)
                                                             <ul> @endif
                                                                 <li>
                                                                     <a href="{{ route('file.download', ['fileId' => $file->id]) }}">{{$file->name}}</a>
                                                                     <a href="{{ route('file.delete', ['fileId' => $file->id]) }}"
-                                                                       class="btn btn-sm btn-danger">Smazat</a>
+                                                                       class="btn btn-sm btn-danger mb-1">Smazat</a>
                                                                 </li>
                                                                 @if($loop->last) </ul> @endif
                                                     @empty

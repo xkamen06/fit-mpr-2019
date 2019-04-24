@@ -137,14 +137,6 @@ class ProjectController extends Controller
             $phase->save();
         }
 
-        $uploadedFile = $request->file('file_attachment');
-        $fileName = Str::random(40) . "___" . $uploadedFile->getClientOriginalName();
-        $filePath = $uploadedFile->storeAs('phases_attachments', $fileName);
-
-        $phaseFile = new File();
-        $phaseFile->name = $uploadedFile->getClientOriginalName();
-        $phaseFile->path = $filePath;
-
         return redirect()->route('project.detail', ['projectId' => $project->id]);
     }
 
@@ -176,16 +168,6 @@ class ProjectController extends Controller
         $project->date_from = $request->date_from;
         $project->date_to = $request->date_to;
         $project->save();
-
-        $uploadedFile = $request->file('file_attachment');
-        $fileName = Str::random(40) . "___" . $uploadedFile->getClientOriginalName();
-        $filePath = $uploadedFile->storeAs('phases_attachments', $fileName);
-
-        $phaseFile = new File();
-        $phaseFile->name = $uploadedFile->getClientOriginalName();
-        $phaseFile->path = $filePath;
-
-        $project->actualPhase->files()->saveMany([$phaseFile]);
 
         return redirect()->route('project.detail', ['projectId' => $project->id]);
     }
