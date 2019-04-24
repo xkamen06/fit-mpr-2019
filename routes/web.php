@@ -68,6 +68,8 @@ Route::middleware(['auth'])->group(function() {
      */
     Route::get('soubor/{file}', 'FileController@show')->name('file.download');
     Route::get('soubor/{file}/smazat', 'FileController@destroy')->name('file.delete');
+    Route::get('soubor/{phase}/pridat', 'FileController@create')->name('file.create');
+    Route::post('soubor/{phase}/pridat', 'FileController@store')->name('file.save');
 });
 
 

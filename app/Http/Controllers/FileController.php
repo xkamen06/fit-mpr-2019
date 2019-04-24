@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\File;
+use App\Project;
+use App\Phase;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class FileController extends Controller
@@ -22,9 +26,11 @@ class FileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Phase $phase)
     {
-        //
+        $project = $phase->project;
+
+        return view('phase.file.create', compact('project', 'phase'));
     }
 
     /**
@@ -33,9 +39,23 @@ class FileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Phase $phase)
     {
-        //
+        $project = $phase->project;
+
+        $uploadedFile = $request->file('file_attachment');
+        
+        if ($uploadedFile) {
+            $fileName = Str::random(40) . "___" . $uploadedFile->getClientOriginalName();
+            $filePath = $uploadedFile->storeAs('phases_attachments', $fileName);
+            $phaseFile = new File();
+            $phaseFile->name = $uploadedFile->getClientOriginalName();
+            $phaseFile->path = $filePath;
+
+            $phase->files()->saveMany([$phaseFile]);
+        }
+
+        return redirect()->route('project.detail', ['projectId' => $project->id]);
     }
 
     /**
@@ -80,6 +100,7 @@ class FileController extends Controller
      */
     public function destroy(File $file)
     {
+        Storage::delete($file->path);
         $file->delete();
         return back();
     }
