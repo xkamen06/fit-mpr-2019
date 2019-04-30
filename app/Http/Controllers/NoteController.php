@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Note;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+/**
+ * Class NoteController
+ * @package App\Http\Controllers
+ */
+class NoteController extends Controller
+{
+    /**
+     * Create Note - Comment
+     * @param int $projectId
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function create(int $projectId, Request $request): RedirectResponse
+    {
+        $note = new Note();
+        $note->content = $request->content;
+        $note->id_project = $projectId;
+        $note->id_user = Auth::id();
+        $note->save();
+        return redirect()->back();
+    }
+}

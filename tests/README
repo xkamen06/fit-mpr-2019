@@ -1,0 +1,16 @@
+-----------------------------------------------
+USAGE
+-----------------------------------------------
+- executing from root directory:
+	- php artisan migrate:refresh
+	- ./vendor/bin/phpunit
+-----------------------------------------------
+TESTS
+-----------------------------------------------
+- tests include:
+	- Module tests (CRUD tests for each module)
+	- POST requests tests
+	- GET requests tests
+	- Controller tests
+	- File uploading
+
