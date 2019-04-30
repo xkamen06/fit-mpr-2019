@@ -25,6 +25,11 @@ class PhaseEnum extends Model
         'id',
     ];
 
+    /**
+     * Get phase short name
+     * @param $id Phase id
+     * @return string
+     */
     public static function getShortName($id)
     {
         $names = [

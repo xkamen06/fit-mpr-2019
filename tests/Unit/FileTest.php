@@ -7,9 +7,17 @@ use App\File;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+/**
+ * Class FileTest
+ * @package Tests\Unit
+ * @author Patrik Krhovsky <patrikkrhovsky@gmail.com>
+ */
 //class testing File module for CRUD and POST requests
 class FileTest extends TestCase
 {
+    /**
+     * Create file test
+     */
     public function testCreateFile()
     {
         $data = [
@@ -28,6 +36,9 @@ class FileTest extends TestCase
 
     }
 
+    /**
+     * Get file test
+     */
     public function testGetFile()
     {
         $data = [
@@ -44,6 +55,9 @@ class FileTest extends TestCase
         $this->assertEquals($found->id_phase, $data['id_phase']);
     }
 
+    /**
+     * Update file test
+     */
     public function testUpdateFile()
     {
         $data = [
@@ -63,6 +77,9 @@ class FileTest extends TestCase
         $this->assertEquals($found->id_phase, $data['id_phase']);
     }
 
+    /**
+     * Delete file test
+     */
     public function testDeleteFile()
     {
         File::destroy(99);

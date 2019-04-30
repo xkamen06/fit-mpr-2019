@@ -97,6 +97,7 @@ class FileController extends Controller
      *
      * @param  \App\File  $file
      * @return \Illuminate\Http\Response
+     * @throws
      */
     public function destroy(File $file)
     {

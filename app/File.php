@@ -35,6 +35,10 @@ class File extends Model
         return $this->belongsTo('App\Phase', 'id_phase', 'id');
     }
 
+    /**
+     * Get path for download
+     * @return string
+     */
     public function download()
     {
         return Storage::download($this->path);

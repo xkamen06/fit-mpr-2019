@@ -9,9 +9,17 @@ use App\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+/**
+ * Class NoteTest
+ * @package Tests\Unit
+ * @author Patrik Krhovsky <patrikkrhovsky@gmail.com>
+ */
 //class testing Note module for CRUD and POST requests
 class NoteTest extends TestCase
 {
+    /**
+     * Create note test
+     */
     public function testCreateNote()
     {
         $data = [
@@ -30,6 +38,9 @@ class NoteTest extends TestCase
 
     }
 
+    /**
+     * Get note test
+     */
     public function testGetNote()
     {
         $data = [
@@ -46,6 +57,9 @@ class NoteTest extends TestCase
         $this->assertEquals($found->id_user, $data['id_user']);
     }
 
+    /**
+     * Update note notest
+     */
     public function testUpdateNote()
     {
         $data = [
@@ -65,6 +79,9 @@ class NoteTest extends TestCase
         $this->assertEquals($found->id_user, $data['id_user']);
     }
 
+    /**
+     * Delete note test
+     */
     public function testDeleteNote()
     {
         Note::destroy(99);
@@ -72,6 +89,9 @@ class NoteTest extends TestCase
         $this->assertEquals($found, null);
     }
 
+    /**
+     * Create note by form test
+     */
     public function testCreatePOSTNote()
     {
         $data = [

@@ -11,9 +11,17 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+/**
+ * Class ProjectTest
+ * @package Tests\Unit
+ * @author Patrik Krhovsky <patrikkrhovsky@gmail.com>
+ */
 //class testing Project module for CRUD and POST requests
 class ProjectTest extends TestCase
 {
+    /**
+     * Create project test
+     */
     public function testCreateProject()
     {
         $data = [
@@ -40,6 +48,9 @@ class ProjectTest extends TestCase
 
     }
 
+    /**
+     * Get project test
+     */
     public function testGetProject()
     {
         $data = [
@@ -65,6 +76,9 @@ class ProjectTest extends TestCase
         $this->assertEquals($data['status'], $found->status);
     }
 
+    /**
+     * Update project test
+     */
     public function testUpdateProject()
     {
         $data = [
@@ -93,6 +107,9 @@ class ProjectTest extends TestCase
         $this->assertEquals($data['status'], $found->status);
     }
 
+    /**
+     * Delete project test
+     */
     public function testDeleteProject()
     {
         Project::destroy(99);
@@ -100,6 +117,9 @@ class ProjectTest extends TestCase
         $this->assertEquals($found, null);
     }
 
+    /**
+     * Create project by form test
+     */
     public function testStorePOSTProject()
     {
         $data = [
@@ -132,6 +152,9 @@ class ProjectTest extends TestCase
 
     }
 
+    /**
+     * Update project by form test
+     */
     public function testUpdatePOSTProject()
     {
         $data2 = [
@@ -189,6 +212,9 @@ class ProjectTest extends TestCase
 
     }
 
+    /**
+     * Update project status by form test
+     */
     public function testUpdateStatusPOSTProject()
     {
         $data2 = [

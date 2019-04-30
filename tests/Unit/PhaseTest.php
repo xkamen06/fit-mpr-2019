@@ -9,9 +9,17 @@ use App\Project;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+/**
+ * Class PhaseTest
+ * @package Tests\Unit
+ * @author Patrik Krhovsky <patrikkrhovsky@gmail.com>
+ */
 //class testing Phase module for CRUD and POST requests
 class PhaseTest extends TestCase
 {
+    /**
+     * Create phase test
+     */
     public function testCreatePhase()
     {
         $data = [
@@ -42,6 +50,9 @@ class PhaseTest extends TestCase
 
     }
 
+    /**
+     * Get phase test
+     */
     public function testGetPhase()
     {
         $data = [
@@ -71,6 +82,9 @@ class PhaseTest extends TestCase
         $this->assertEquals($data['state'], $found->state);
     }
 
+    /**
+     * Update phase test
+     */
     public function testUpdatePhase()
     {
         $data = [
@@ -103,6 +117,9 @@ class PhaseTest extends TestCase
         $this->assertEquals($data['state'], $found->state);
     }
 
+    /**
+     * Delete phase test
+     */
     public function testDeletePhase()
     {
         Phase::destroy(99);
@@ -110,6 +127,9 @@ class PhaseTest extends TestCase
         $this->assertEquals($found, null);
     }
 
+    /**
+     * Update phase by form test
+     */
     public function testUpdatePOSTPhase()
     {
         $data2 = [
@@ -148,6 +168,9 @@ class PhaseTest extends TestCase
         Phase::destroy(999);
     }
 
+    /**
+     * Update actual phase by post
+     */
     public function testZmenitPOSTPhase()
     {
         $data = [

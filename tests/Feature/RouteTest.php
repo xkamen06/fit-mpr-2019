@@ -7,9 +7,17 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Auth;
 
+/**
+ * Class RouteTest
+ * @package Tests\Feature
+ * @author Patrik Krhovsky <patrikkrhovsky@gmail.com>
+ */
 //class testing GET requests
 class RouteTest extends TestCase
 {
+    /**
+     * Tests for router
+     */
     public function testRoutes()
     {
         $response = $this->get('/login');

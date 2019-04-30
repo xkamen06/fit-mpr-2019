@@ -8,9 +8,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+/**
+ * Class UserTest
+ * @package Tests\Unit
+ * @author Patrik Krhovsky <patrikkrhovsky@gmail.com>
+ */
 //class testing User module for POST requests
 class UserTest extends TestCase
 {
+    /**
+     * Create user by form test
+     */
     public function testStorePOSTUser()
     {
         $data = [
@@ -30,6 +38,9 @@ class UserTest extends TestCase
 
     }
 
+    /**
+     * Update user by form test
+     */
     public function testUpdatePOSTUser()
     {
 		$id = DB::select("select max(id) as iden from users");

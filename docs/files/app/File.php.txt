@@ -1,0 +1,47 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+
+/**
+ * Class File
+ * @package App
+ */
+class File extends Model
+{
+    /**
+     * Table DB
+     * @var string
+     */
+    protected $table = 'file';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'id', 'name', 'path', 'id_phase'
+    ];
+
+    /**
+     * Get phase
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function phase()
+    {
+        return $this->belongsTo('App\Phase', 'id_phase', 'id');
+    }
+
+    /**
+     * Get path for download
+     * @return string
+     */
+    public function download()
+    {
+        return Storage::download($this->path);
+    }
+}
+
